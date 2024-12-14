@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Dados - TeutoNET</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">TeutoNET</div>
+    </header>
+
+    <div class="form-container">
+        <h2>Editar Dados</h2>
+        <form method="POST">
+<div class="form-group">
+    <label for="data">Data e Hora:</label>
+    <input type="datetime-local" id="data" name="data" class="input-field" 
+           value="{{ row['data'][:16].replace(' ', 'T') }}" required>
+</div>
+
+
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente" class="input-field" value="{{ row['cliente'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="responsavel">Responsável:</label>
+                <input type="text" id="responsavel" name="responsavel" class="input-field" value="{{ row['responsavel'] }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quaza">Quaza:</label>
+                <div class="radio-group">
+                    <input type="radio" id="ativo" name="quaza" value="Ativo" {% if row['quaza'] == 'Ativo' %} checked {% endif %}> Ativo
+                    <input type="radio" id="inativo" name="quaza" value="Inativo" {% if row['quaza'] == 'Inativo' %} checked {% endif %}> Inativo
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passado_para">Passado para:</label>
+                <div class="radio-group">
+                    <input type="radio" id="suporte_tecnico" name="passado_para" value="Suporte Técnico" {% if row['passado_para'] == 'Suporte Técnico' %} checked {% endif %}> Suporte Técnico
+                    <input type="radio" id="plantão" name="passado_para" value="Plantão" {% if row['passado_para'] == 'Plantão' %} checked {% endif %}> Plantão
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Atualizar</button>
+        </form>
+    </div>
+</body>
+</html>

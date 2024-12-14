@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Dados - TeutoNET</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="logo">TeutoNET</div>
+    </header>
+
+    <div class="form-container">
+        <h2>Atendimentos passados no final de expediente: do atendente ao Suporte Técnico ou Plantão</h2>
+        <form method="POST">
+            <div class="form-group">
+                <label for="data">Data e Hora:</label>
+                <input type="datetime-local" id="data" name="data" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <input type="text" id="cliente" name="cliente" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="responsavel">Responsável:</label>
+                <input type="text" id="responsavel" name="responsavel" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quaza">Quaza:</label>
+                <div class="radio-group">
+                    <input type="radio" id="ativo" name="quaza" value="Ativo" required> Ativo
+                    <input type="radio" id="inativo" name="quaza" value="Inativo" required> Inativo
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="passado_para">Passado para:</label>
+                <div class="radio-group">
+                    <input type="radio" id="suporte_tecnico" name="passado_para" value="Suporte Técnico" required> Suporte Técnico
+                    <input type="radio" id="plantão" name="passado_para" value="Plantão" required> Plantão
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Inserir</button>
+        </form>
+    </div>
+
+    <div class="table-container">
+       <table>
+    <thead>
+        <tr>
+            <th>Data</th>
+            <th>Cliente</th>
+            <th>Responsável</th>
+            <th>Quaza</th>
+            <th>Passado para</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                <td>{{ row['data'] | format_date }}</td>  <!-- A data será formatada -->
+                <td>{{ row['cliente'] }}</td>
+                <td>{{ row['responsavel'] }}</td>
+                <td>{{ row['quaza'] }}</td>
+                <td>{{ row['passado_para'] }}</td>
+                <td>
+                    <a href="{{ url_for('edit', id=row['id']) }}">Editar</a> |
+                    <a href="{{ url_for('delete', id=row['id']) }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    </div>
+</body>
+</html>
