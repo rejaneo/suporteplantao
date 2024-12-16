@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de transferência de atendimentos no Blip - TeutoNET</title>
+    <title>Transferência de atendimentos no Blip</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -11,8 +11,9 @@
     </header>
 
     <div class="form-container">
-        <h2>Registro de transferência de atendimentos no Blip</h5>
-        <center><h5>Este formulário é para o registro de atendimentos no Blip que são transferidos entre Suporte Técnico e Plantão. Aqui serão anotados os atendimentos que não devem ser encerrados no Blip sem que seja feita a devida atualização e encerramento do atendimento no Quaza. </h3></center>
+        <h2>Transferência de atendimentos no Blip</h2>
+        <center><h5>Este formulário é para o registro de atendimentos no Blip que serão transferidos entre Suporte Técnico e Plantão. Serão registrados os atendimentos do Blip que não devem ter a conversa encerrada sem que seja feita a devida atualização e encerramento do atendimento correspondente no Quaza. Ao selecionar o status Ativo do campo Quaza, significa que o cliente cuja conversa Blip está sendo registrada tem um atendimento em aberto no Quaza.</h5>
+<h6>O status Inativo do campo Quaza significa que não tem um atendimento em aberto no Quaza para o cliente correspondente. O uso do status Inativo se reserva a casos específicos, como quando o atendente deseja acompanhar o desenvolvimento do atendimento de um cliente mas teve que transferir a conversa do Blip por algum motivo antes de finalizá-la. Por exemplo: o expediente chegou ao fim, não foi necessário abrir um atendimento no Quaza até aquele momento para a conversa no Blip mas você deseja acompanhar a situação do cliente.</h6></center>
         <form method="POST">
             <div class="form-group">
                 <label for="data">Data e Hora:</label>
