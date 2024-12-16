@@ -49,6 +49,9 @@ def edit(id):
     row = conn.execute('SELECT * FROM registros WHERE id = ?', (id,)).fetchone()
 
     if request.method == 'POST':
+        # Captura a data no formato datetime-local e converte para o formato do SQLite
+        data_input = request.form['data']  # Exemplo: 2024-12-14T12:47
+        data = datetime.strptime(data_input, "%Y-%m-%dT%H:%M").strftime("%Y-%m-%d %H:%M:%S")
 
         cliente = request.form['cliente']
         ticket = request.form['ticket']
@@ -56,14 +59,22 @@ def edit(id):
         quaza = request.form['quaza']
         passado_para = request.form['passado_para']
 
-        conn.execute('UPDATE registros SET cliente = ?, ticket = ?, responsavel = ?, quaza = ?, passado_para = ? WHERE id = ?',
-                     (cliente, ticket, responsavel, quaza, passado_para, id))
+        conn.execute('UPDATE registros SET data = ?, cliente = ?, ticket = ?, responsavel = ?, quaza = ?, passado_para = ? WHERE id = ?',
+                     (data, cliente, ticket, responsavel, quaza, passado_para, id))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
 
     conn.close()
     return render_template('edit.html', row=row)
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    conn = get_db_connection()
+    conn.execute('DELETE FROM registros WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
 
 import os
 

@@ -78,7 +78,8 @@
                 <td>{{ row['quaza'] }}</td>
                 <td>{{ row['passado_para'] }}</td>
                 <td>
-                    <a href="{{ url_for('edit', id=row['id']) }}">Editar</a>
+                    <a href="{{ url_for('edit', id=row['id']) }}">Editar</a> |
+                    <a href="{{ url_for('delete', id=row['id']) }}" onclick="return confirm('Tem certeza que deseja excluir?')">Excluir</a>
                 </td>
             </tr>
         {% endfor %}
