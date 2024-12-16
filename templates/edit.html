@@ -26,6 +26,11 @@
             </div>
 
             <div class="form-group">
+                <label for="ticket">Ticket:</label>
+                <input type="text" id="ticket" name="ticket" class="input-field" value="{{ row['ticket'] }}" required>
+            </div>
+
+            <div class="form-group">
                 <label for="responsavel">Responsável:</label>
                 <input type="text" id="responsavel" name="responsavel" class="input-field" value="{{ row['responsavel'] }}" required>
             </div>
@@ -39,7 +44,7 @@
             </div>
 
             <div class="form-group">
-                <label for="passado_para">Passado para:</label>
+                <label for="passado_para">Transferido para:</label>
                 <div class="radio-group">
                     <input type="radio" id="suporte_tecnico" name="passado_para" value="Suporte Técnico" {% if row['passado_para'] == 'Suporte Técnico' %} checked {% endif %}> Suporte Técnico
                     <input type="radio" id="plantão" name="passado_para" value="Plantão" {% if row['passado_para'] == 'Plantão' %} checked {% endif %}> Plantão

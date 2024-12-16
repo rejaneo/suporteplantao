@@ -11,6 +11,7 @@ def create_db():
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         data TEXT,
         cliente TEXT,
+        ticket TEXT,
         responsavel TEXT,
         quaza TEXT,
         passado_para TEXT

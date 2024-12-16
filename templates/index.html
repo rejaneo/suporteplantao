@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Registro de Dados - TeutoNET</title>
+    <title>Registro de transferência de atendimentos no Blip - TeutoNET</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -11,7 +11,8 @@
     </header>
 
     <div class="form-container">
-        <h2>Atendimentos passados no final de expediente: do atendente ao Suporte Técnico ou Plantão</h2>
+        <h2>Registro de transferência de atendimentos no Blip</h5>
+        <center><h5>Este formulário é para o registro de atendimentos no Blip que são transferidos entre Suporte Técnico e Plantão. Aqui serão anotados os atendimentos que não devem ser encerrados no Blip sem que seja feita a devida atualização e encerramento do atendimento no Quaza. </h3></center>
         <form method="POST">
             <div class="form-group">
                 <label for="data">Data e Hora:</label>
@@ -21,6 +22,11 @@
             <div class="form-group">
                 <label for="cliente">Cliente:</label>
                 <input type="text" id="cliente" name="cliente" class="input-field" required>
+            </div>
+
+            <div class="form-group">
+                <label for="ticket">Ticket:</label>
+                <input type="text" id="ticket" name="ticket" class="input-field" required>
             </div>
 
             <div class="form-group">
@@ -37,7 +43,7 @@
             </div>
 
             <div class="form-group">
-                <label for="passado_para">Passado para:</label>
+                <label for="passado_para">Transferido para:</label>
                 <div class="radio-group">
                     <input type="radio" id="suporte_tecnico" name="passado_para" value="Suporte Técnico" required> Suporte Técnico
                     <input type="radio" id="plantão" name="passado_para" value="Plantão" required> Plantão
@@ -54,6 +60,7 @@
         <tr>
             <th>Data</th>
             <th>Cliente</th>
+            <th>Ticket</th>
             <th>Responsável</th>
             <th>Quaza</th>
             <th>Passado para</th>
@@ -65,6 +72,7 @@
             <tr>
                 <td>{{ row['data'] | format_date }}</td>  <!-- A data será formatada -->
                 <td>{{ row['cliente'] }}</td>
+                <td>{{ row['ticket'] }}</td>
                 <td>{{ row['responsavel'] }}</td>
                 <td>{{ row['quaza'] }}</td>
                 <td>{{ row['passado_para'] }}</td>

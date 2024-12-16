@@ -26,13 +26,14 @@ def index():
         data = datetime.strptime(data_input, "%Y-%m-%dT%H:%M").strftime("%Y-%m-%d %H:%M:%S")
 
         cliente = request.form['cliente']
+        ticket = request.form['ticket']
         responsavel = request.form['responsavel']
         quaza = request.form['quaza']
         passado_para = request.form['passado_para']
 
         conn = get_db_connection()
-        conn.execute('INSERT INTO registros (data, cliente, responsavel, quaza, passado_para) VALUES (?, ?, ?, ?, ?)',
-                     (data, cliente, responsavel, quaza, passado_para))
+        conn.execute('INSERT INTO registros (data, cliente, ticket, responsavel, quaza, passado_para) VALUES (?, ?, ?, ?, ?, ?)',
+                     (data, cliente, ticket, responsavel, quaza, passado_para))
         conn.commit()
         conn.close()
 
@@ -53,12 +54,13 @@ def edit(id):
         data = datetime.strptime(data_input, "%Y-%m-%dT%H:%M").strftime("%Y-%m-%d %H:%M:%S")
 
         cliente = request.form['cliente']
+        ticket = request.form['ticket']
         responsavel = request.form['responsavel']
         quaza = request.form['quaza']
         passado_para = request.form['passado_para']
 
-        conn.execute('UPDATE registros SET data = ?, cliente = ?, responsavel = ?, quaza = ?, passado_para = ? WHERE id = ?',
-                     (data, cliente, responsavel, quaza, passado_para, id))
+        conn.execute('UPDATE registros SET data = ?, cliente = ?, ticket = ?, responsavel = ?, quaza = ?, passado_para = ? WHERE id = ?',
+                     (data, cliente, ticket, responsavel, quaza, passado_para, id))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
@@ -74,5 +76,10 @@ def delete(id):
     conn.close()
     return redirect(url_for('index'))
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Obtém a porta da variável de ambiente ou usa a porta 5000 como fallback
+    port = int(os.environ.get('PORT', 5000))
+    # Faz o bind para 0.0.0.0 (necessário para conexões externas no Render)
+    app.run(host='0.0.0.0', port=port)
